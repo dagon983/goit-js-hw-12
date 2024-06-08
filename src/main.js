@@ -21,7 +21,8 @@ let inputValue = '';
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
-     inputValue = event.currentTarget.elements.inputText.value.trim(); 
+    page = 1;
+    inputValue = event.currentTarget.elements.inputText.value.trim(); 
 
     if (inputValue === "") {
         iziToast.error({
@@ -35,11 +36,13 @@ form.addEventListener("submit", async (event) => {
     showLoader();
 
     try{
+        loadMoreBtn.style.display = "none";
         const data = await fetchPictares(inputValue, page);
         const totalHits = data.totalHits;
         hideLoader()
         
         if (totalHits === 0) {
+            loadMoreBtn.style.display = "none";
             iziToast.error({
                 title: 'Error',
                 message: "Sorry, there are no images matching your search query. Please try again!",
@@ -53,8 +56,9 @@ form.addEventListener("submit", async (event) => {
         imageList.innerHTML = markUp;
         newLightBox.refresh();
 
+        
         if(totalHits > 15) {
-           loadMoreBtn.style.display = "block";
+            loadMoreBtn.style.display = "block";
         }
     
     } catch {
