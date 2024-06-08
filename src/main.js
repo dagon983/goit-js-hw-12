@@ -54,7 +54,7 @@ form.addEventListener("submit", async (event) => {
         newLightBox.refresh();
 
         if(totalHits > 15) {
-            loadMoreBtn.style.display = "block";
+           loadMoreBtn.style.display = "block";
         }
     
     } catch {
@@ -63,6 +63,7 @@ form.addEventListener("submit", async (event) => {
             message: `Something went wrong. ${response.message}`
         })
     }
+    event.target.reset();
 });
 
 loadMoreBtn.addEventListener("click", async (event) => {
@@ -99,7 +100,10 @@ loadMoreBtn.addEventListener("click", async (event) => {
             title: "Error",
             message: `Something went wrong ${error.message}.`
         })
+    }   finally {
+        hideLoader();
     }
+
 }) 
 
 

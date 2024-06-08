@@ -164,4 +164,8 @@ button:hover {
 
 .load-more {
   display: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 125px;
+  height: 40px;
 }
