@@ -1,4 +1,6 @@
-export default function fetchPictares(findPic) {
+import axios from 'axios';
+
+export default  async function fetchPictares(findPic, page = 1, per_page = 15) {
     const baseUrl = "https://pixabay.com";
     const endPoint = "/api/";
     const params = new URLSearchParams ({
@@ -6,13 +8,17 @@ export default function fetchPictares(findPic) {
         q: findPic,
         image_type: "photo",
         orientation: "horizontal",
-        safesearch: "true"
+        safesearch: "true",
+        page: page, 
+        per_page: per_page
     });
     const url = `${baseUrl}${endPoint}?${params}`;
 
-    return fetch(url)
-        .then((res) => res.json())
-        .catch(error => {
-            throw new Error (`HTTP error! status: ${response.status}`)});
+    try{
+        const response = await axios.get(url)
+        return response.data; 
+    } catch {
+        throw new Error (`HTTP error! status: ${response.status}`)
+    }
 }
 

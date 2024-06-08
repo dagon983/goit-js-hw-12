@@ -161,3 +161,7 @@ button:hover {
   letter-spacing: 0.04em;
   color: #2e2f42;
 }
+
+.load-more {
+  display: none;
+}
